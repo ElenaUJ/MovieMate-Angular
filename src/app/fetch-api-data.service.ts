@@ -22,7 +22,7 @@ export class FetchApiDataService {
   constructor(private http: HttpClient) {}
   // Making the api call for the user registration endpoint
   // `public` identifier makes this method accessible from outside the class
-  // Observable is a concept of a data stream that changes over time
+  // Observable is a concept of a data stream that changes over time (asynchonous and synchronous)
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
     // .post() is a method of the HttpClient module to post the user Details to API and return API response, first argument concatenates the apiUrl/users, and the second argument is the data sent in the body of the POST request
@@ -30,14 +30,12 @@ export class FetchApiDataService {
       this.http
         .post(apiUrl + 'users', userDetails)
         // .pipe() combines functions, takes them as arguments and returns a function that runs them in sequence
-        // In this case, it is needed because the API response is an Observable, asynchronous/changing over time, and errors have to be caught continuously
-        // Question: Did I understand it correctly? Does Observable mean it has to be asynchronous?
-        // Question: Why does pipe not have to be imported if it's a method of the RxJS library? Because it is run on the RxJS Observable?
+        // In this case, it is needed because the API response is an Observable, in this case asynchronous/changing over time, and errors have to be caught continuously
         .pipe(catchError(this.handleError))
     );
   }
 
-  // Question: Shouldn't there be much more to be done to authenticate? Is there logic missing? Wouldn't even know where to start...
+  // Authentication happens server side
   public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
 
@@ -49,14 +47,11 @@ export class FetchApiDataService {
   public getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
 
-    return (
-      this.http
-        .get(apiUrl + 'movies', {
-          headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
-        })
-        // Question: The squiggly line is because Response is not an Object/ any (which is needed for the map method), correct? So shall I change the extractResponseData's res type to be Object, or any?
-        .pipe(map(this.extractResponseData), catchError(this.handleError))
-    );
+    return this.http
+      .get(apiUrl + 'movies', {
+        headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   public getOneMovie(title: string): Observable<any> {
@@ -89,18 +84,18 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // Question: I don't have an endpoint in my API for this. Didn't need it for my React app. Do I need to make one for the Angular client-side?
-  public getUser(username: string): Observable<any> {
-    const token = localStorage.getItem('token');
+  // No endpoint in API
+  // public getUser(username: string): Observable<any> {
+  //   const token = localStorage.getItem('token');
 
-    return this.http
-      .get(apiUrl + 'users' + username, {
-        headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
+  //   return this.http
+  //     .get(apiUrl + 'users' + username, {
+  //       headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
+  //     })
+  //     .pipe(map(this.extractResponseData), catchError(this.handleError));
+  // }
 
-  // Question: Same here. Don't have an endpoint for this.
+  // No endpoint in API
   // Question: A thing that just came to my mind, is it ok to always have Obervable<any> as return type because it could be anything including error objects?
   public getFavouriteMovies(username: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -115,14 +110,11 @@ export class FetchApiDataService {
   public addFavouriteMovie(username: string, movieid: string): Observable<any> {
     const token = localStorage.getItem('token');
 
-    return (
-      this.http
-        .post(apiUrl + 'users' + username + 'topMovies' + movieid, {
-          headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
-        })
-        // Question: Do I need the response here? It's the updated user object. Or will I handle that through my (new) getUser service/endpoint?
-        .pipe(map(this.extractResponseData), catchError(this.handleError))
-    );
+    return this.http
+      .post(apiUrl + 'users' + username + 'topMovies' + movieid, {
+        headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   public deleteFavouriteMovie(
@@ -163,7 +155,8 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  private extractResponseData(res: Response): any {
+  // res type can be Response or Object
+  private extractResponseData(res: Response | Object): any {
     const body = res;
     return body || {};
   }
