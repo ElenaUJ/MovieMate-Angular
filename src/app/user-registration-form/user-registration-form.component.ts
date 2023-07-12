@@ -43,12 +43,14 @@ export class UserRegistrationFormComponent implements OnInit {
         // Will close modal on success
         this.dialogRef.close();
         // Second argument 'OK' represents action button
+        // Question: I noticed that the message shown in the snackBar in case of success is [Object object], obviously not ideal. Shall I write a custom message that the user successfully signed up?
         this.snackBar.open(result, 'OK', {
           duration: 2000,
         });
       },
       // Question: I replaced result with error, seems more intuitive to me - that ok?
       error: (error) => {
+        console.error(error);
         this.snackBar.open(error, 'OK', {
           duration: 2000,
         });
