@@ -34,8 +34,14 @@ export class UserLoginFormComponent implements OnInit {
         localStorage.setItem('token', result.token);
       },
       error: (error) => {
-        console.error(error);
-        this.snackBar.open(error, 'OK', {
+        let errorMessage = error.message;
+
+        if (errorMessage.includes('Missing credentials')) {
+          errorMessage = 'Please complete all fields';
+        }
+
+        console.error(errorMessage);
+        this.snackBar.open(errorMessage, 'OK', {
           duration: 2000,
         });
       },

@@ -48,10 +48,11 @@ export class UserRegistrationFormComponent implements OnInit {
           duration: 2000,
         });
       },
-      // Question: I replaced result with error, seems more intuitive to me - that ok?
       error: (error) => {
-        console.error(error);
-        this.snackBar.open(error, 'OK', {
+        let errorMessage = error.message;
+
+        console.error(errorMessage);
+        this.snackBar.open(errorMessage, 'OK', {
           duration: 2000,
         });
       },

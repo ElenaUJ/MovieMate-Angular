@@ -161,21 +161,43 @@ export class FetchApiDataService {
   }
 
   private handleError(error: HttpErrorResponse): any {
+    // Default error message
+    let errorMessage = 'An error occurred. Please try again later.';
+
     if (error.error instanceof ErrorEvent) {
       console.error(
         'Some error occurred on the client-side',
         error.error.message
       );
+      // API error with specific message
+    } else if (error.error?.message) {
+      errorMessage = error.error.message;
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${errorMessage}`
+      );
+      // API validation error array
+    } else if (Array.isArray(error.error.errors)) {
+      const errorMessages = error.error.errors.map(
+        (errorItem: any) => errorItem.msg
+      );
+      errorMessages.forEach((errorMsg: string) => {
+        if (errorMsg.includes('is required')) {
+          errorMessage = 'Please complete all fields';
+        } else {
+          errorMessage = errorMsg;
+        }
+      });
+      console.error(`Error Status code ${error.status}, ` + `Validation error`);
+      // API error with unknown/unexpected format
     } else {
       console.error(
         `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
       );
     }
-    // An observable error is returned (occurrs during the stream's execution)
+
     return throwError(
-      // Question: I altered the error message to return what the API sends here, because I wanted the snack bar to show a more detailed error message and not just that something went wrong. Is there a better way of doing it, like adding the HTTP status code to the error object and then using an if else statement in the registration component? Because like this it'll depend on what I specified in the API and that might not always be the most user friendly message (I'd have to check)
-      () => new Error(error.error)
-      // () => new Error('Something bad happened; please try again later.')
+      // Question: I spent quite some time on tweaking the error handling to return the message the API sends upon login/registration, because I wanted the snack bar to show a more detailed error message. Is there a better/smarter/more straightforward way of doing it (feels pretty bulky, everything), and should I rather somehow include the logic in the components?
+      () => new Error(errorMessage)
     );
   }
 }
