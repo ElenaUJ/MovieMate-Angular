@@ -96,7 +96,6 @@ export class FetchApiDataService {
   // }
 
   // No endpoint in API
-  // Question: A thing that just came to my mind, is it ok to always have Obervable<any> as return type because it could be anything including error objects?
   public getFavouriteMovies(username: string): Observable<any> {
     const token = localStorage.getItem('token');
 
@@ -174,9 +173,9 @@ export class FetchApiDataService {
     }
     // An observable error is returned (occurrs during the stream's execution)
     return throwError(
-      () => new Error('Something bad happened; please try again later.')
+      // Question: I altered the error message to return what the API sends here, because I wanted the snack bar to show a more detailed error message and not just that something went wrong. Is there a better way of doing it, like adding the HTTP status code to the error object and then using an if else statement in the registration component? Because like this it'll depend on what I specified in the API and that might not always be the most user friendly message (I'd have to check)
+      () => new Error(error.error)
+      // () => new Error('Something bad happened; please try again later.')
     );
-    // Question: First, I used the throwError the way it was in the course (see below) but got a warning it's deprecated. Can you please check that I did it the right way now?
-    // return throwError('Something bad happened; please try again later.');
   }
 }
