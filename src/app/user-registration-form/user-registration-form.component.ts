@@ -5,7 +5,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 
 // @Component decorator tells Angular the class right below is a component
 @Component({
-  // Definition of custom HTML element into which component will render
+  // Definition of custom HTML element into which component will render, can be used in another HTML template
   selector: 'app-user-registration-form',
   templateUrl: './user-registration-form.component.html',
   styleUrls: ['./user-registration-form.component.scss'],
