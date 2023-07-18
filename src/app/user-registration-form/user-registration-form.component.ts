@@ -31,7 +31,6 @@ export class UserRegistrationFormComponent implements OnInit {
 
   // Implementing function for registering user: passing userData object into API call
   // Sending form input to backend
-  // Question: Because the subscribe method is deprecated, I tried to fix it like this looking at the documentation - is it right/ will it work the same?
   registerUser(): void {
     // Go to userRegistration service in fetchApiData and pass it the userData object
     // subscribe method is called on resulting Observable

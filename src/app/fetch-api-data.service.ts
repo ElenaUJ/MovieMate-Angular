@@ -5,7 +5,6 @@ import {
   HttpHeaders,
   HttpErrorResponse,
 } from '@angular/common/http';
-// Question: Couldn't I just import all rxjs modules from 'rxjs'? What's the difference?
 import { Observable, ObservedValuesFromArray, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
