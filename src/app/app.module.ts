@@ -1,10 +1,14 @@
+// Entry point for Angular app
 // Module houses important dependencies so they can be used across components
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // Simplified API facilitation cimmunication of client app with API or server-side
 import { HttpClientModule } from '@angular/common/http';
+//App routing
+import { RouterModule, Routes } from '@angular/router';
 
+// Question: What is this AppRoutingMOdule for? Are we even using it, because out reouting is managed by the RouterModule?
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // Do I need this and where should it go? Was added during Material installation
@@ -20,9 +24,25 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+
+const appRoutes: Routes = [
+  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'movies', component: MovieCardComponent },
+  // Question: Is pathmatch: 'prefix' even necessary here?
+  // Question: What if the user is logged in? It would be better to redirect to the movies page?
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+];
 
 @NgModule({
-  declarations: [AppComponent, UserRegistrationFormComponent, UserLoginFormComponent],
+  declarations: [
+    AppComponent,
+    UserRegistrationFormComponent,
+    UserLoginFormComponent,
+    MovieCardComponent,
+    WelcomePageComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -35,6 +55,7 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent],
