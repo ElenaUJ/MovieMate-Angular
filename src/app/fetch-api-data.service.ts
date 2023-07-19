@@ -57,7 +57,7 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     return this.http
-      .get(apiUrl + 'movies' + title, {
+      .get(apiUrl + 'movies/' + title, {
         headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -67,7 +67,7 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     return this.http
-      .get(apiUrl + 'movies/directors' + directorName, {
+      .get(apiUrl + 'movies/directors/' + directorName, {
         headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -77,7 +77,7 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     return this.http
-      .get(apiUrl + 'movies/genres' + genreName, {
+      .get(apiUrl + 'movies/genres/' + genreName, {
         headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -99,7 +99,7 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     return this.http
-      .get(apiUrl + 'users' + username + 'topMovies', {
+      .get(apiUrl + 'users/' + username + '/topMovies', {
         headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -109,7 +109,7 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     return this.http
-      .post(apiUrl + 'users' + username + 'topMovies' + movieid, {
+      .post(apiUrl + 'users/' + username + '/topMovies/' + movieid, {
         headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -122,7 +122,7 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     return this.http
-      .delete(apiUrl + 'users' + username + 'topMovies' + movieid, {
+      .delete(apiUrl + 'users/' + username + '/topMovies/' + movieid, {
         headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -134,7 +134,7 @@ export class FetchApiDataService {
 
     return this.http
       .put(
-        apiUrl + 'users' + username,
+        apiUrl + 'users/' + username,
         {
           headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
         },
@@ -147,7 +147,7 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     return this.http
-      .delete(apiUrl + 'users' + username, {
+      .delete(apiUrl + 'users/' + username, {
         headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
       })
       .pipe(catchError(this.handleError));
