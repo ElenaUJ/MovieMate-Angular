@@ -133,13 +133,9 @@ export class FetchApiDataService {
     console.log(updatedDetails);
 
     return this.http
-      .put(
-        apiUrl + 'users/' + username,
-        {
-          headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
-        },
-        updatedDetails
-      )
+      .put(apiUrl + 'users/' + username, updatedDetails, {
+        headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
+      })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
