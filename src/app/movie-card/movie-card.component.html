@@ -1,7 +1,17 @@
-<!-- ngFor directive iteratues through all returned movies, with each movie in own card; let movie of movies refers to component's movies variable -->
-<mat-card *ngFor="let movie of movies; let i = index">
-  <mat-dialog-content>
-    <mat-card-title>{{ movie.Title }}</mat-card-title>
-    <mat-card-subtitle><img src="{{ movie.ImagePath }}" /></mat-card-subtitle>
-  </mat-dialog-content>
-</mat-card>
+<div class="main-page">
+  <button
+    mat-raised-button
+    (click)="openProfile()"
+    style="margin-right: 10px"
+    color="primary"
+  >
+    Profile
+  </button>
+  <!-- ngFor directive iteratues through all returned movies, with each movie in own card; let movie of movies refers to component's movies variable -->
+  <mat-card *ngFor="let movie of movies; let i = index">
+    <mat-dialog-content>
+      <mat-card-title>{{ movie.Title }}</mat-card-title>
+      <mat-card-subtitle><img src="{{ movie.ImagePath }}" /></mat-card-subtitle>
+    </mat-dialog-content>
+  </mat-card>
+</div>

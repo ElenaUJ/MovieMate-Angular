@@ -1,0 +1,17 @@
+<div class="profile-page">
+  <h1>Your profile</h1>
+  <table>
+    <tr>
+      <td>Username</td>
+      <td>{{ user.Username }}</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>{{ user.Email }}</td>
+    </tr>
+    <tr>
+      <td>Birthday</td>
+      <td>{{ user.Birthday | date : "longDate" }}</td>
+    </tr>
+  </table>
+</div>
