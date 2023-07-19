@@ -14,4 +14,12 @@
       <td>{{ user.Birthday | date : "longDate" }}</td>
     </tr>
   </table>
+  <button
+    mat-raised-button
+    (click)="openUserUpdateDialog()"
+    style="margin-right: 10px"
+    color="primary"
+  >
+    Update user details
+  </button>
 </div>
