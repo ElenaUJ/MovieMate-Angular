@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -11,11 +10,9 @@ import { Router } from '@angular/router';
 export class MovieCardComponent {
   movies: any[] = [];
 
-  constructor(
-    public fetchApiData: FetchApiDataService,
-    private router: Router
-  ) {}
+  constructor(public fetchApiData: FetchApiDataService) {}
 
+  // Question: Why does this work, even if I'm not using implements OnInit?
   ngOnInit(): void {
     this.getMovies();
   }
@@ -27,9 +24,5 @@ export class MovieCardComponent {
       console.log(this.movies);
       return this.movies;
     });
-  }
-
-  openProfile(): void {
-    this.router.navigate(['profile']);
   }
 }
