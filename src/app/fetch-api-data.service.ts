@@ -4,8 +4,9 @@ import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse,
+  HttpResponse,
 } from '@angular/common/http';
-import { Observable, ObservedValuesFromArray, throwError } from 'rxjs';
+import { Observable, ObservedValuesFromArray, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 // Moviemate backend API URL
@@ -146,7 +147,18 @@ export class FetchApiDataService {
       .delete(apiUrl + 'users/' + username, {
         headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        // Making sure the component recognizes a status code of 200 as successful and doesn't throw and error
+        catchError((error: any): any => {
+          if (error.status === 200) {
+            console.log('status is 200');
+            // of turns the response into an Observable as required by the deleteUser function
+            return of(error);
+          } else {
+            this.handleError;
+          }
+        })
+      );
   }
 
   // res type can be Response or Object
@@ -158,6 +170,7 @@ export class FetchApiDataService {
   private handleError(error: HttpErrorResponse): any {
     // Default error message
     let errorMessage = 'An error occurred. Please try again later.';
+    console.log('handeError block is being executed');
 
     if (error.error instanceof ErrorEvent) {
       console.error(

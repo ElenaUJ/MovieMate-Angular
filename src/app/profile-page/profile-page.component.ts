@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserUpdateFormComponent } from '../user-update-form/user-update-form.component';
+import { FetchApiDataService } from '../fetch-api-data.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -11,7 +13,12 @@ import { UserUpdateFormComponent } from '../user-update-form/user-update-form.co
 export class ProfilePageComponent implements OnInit {
   user: any;
 
-  constructor(public dialog: MatDialog, private router: Router) {}
+  constructor(
+    public fetchApiData: FetchApiDataService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getUser();
@@ -32,6 +39,27 @@ export class ProfilePageComponent implements OnInit {
   openUserUpdateDialog(): void {
     this.dialog.open(UserUpdateFormComponent, {
       width: '280px',
+    });
+  }
+
+  deleteUser(): void {
+    this.fetchApiData.deleteUser(this.user.Username).subscribe({
+      next: () => {
+        this.snackBar.open('Account has been deleted!', 'OK', {
+          duration: 2000,
+        });
+        localStorage.removeItem('user');
+        localStorage.removeItem('user');
+        this.router.navigate(['welcome']);
+      },
+      error: (error) => {
+        let errorMessage = error.message;
+
+        console.error(errorMessage);
+        this.snackBar.open(errorMessage, 'OK', {
+          duration: 2000,
+        });
+      },
     });
   }
 }
