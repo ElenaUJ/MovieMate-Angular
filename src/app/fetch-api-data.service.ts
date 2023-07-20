@@ -197,6 +197,11 @@ export class FetchApiDataService {
       });
       console.error(`Error Status code ${error.status}, ` + `Validation error`);
       // API error with unknown/unexpected format
+    } else if (error?.error) {
+      errorMessage = error.error;
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${errorMessage}`
+      );
     } else {
       console.error(
         `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
