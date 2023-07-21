@@ -11,7 +11,6 @@ import { SingleMovieCardComponent } from '../single-movie-card/single-movie-card
 // Question: Don't I have to add implements OnInit here, too, just like in the Login and Register components? In the course script that's missing
 export class MovieCardComponent {
   movies: any[] = [];
-  user: any = {};
 
   constructor(
     public fetchApiData: FetchApiDataService,
