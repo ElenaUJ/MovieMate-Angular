@@ -26,15 +26,6 @@ export class UserUpdateFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getCurrentUsername(): string {
-    const userString = localStorage.getItem('user');
-    if (userString) {
-      const user = JSON.parse(userString);
-      return user.Username;
-    }
-    return '';
-  }
-
   getUpdatedUserData(): any {
     let updatedUserData: {
       Username?: string;
@@ -60,27 +51,25 @@ export class UserUpdateFormComponent implements OnInit {
   }
 
   updateUser(): void {
-    this.fetchApiData
-      .editUser(this.getCurrentUsername(), this.getUpdatedUserData())
-      .subscribe({
-        next: (result) => {
-          console.log(result);
-          this.dialogRef.close();
-          this.snackBar.open('Update successful!', 'OK', {
-            duration: 2000,
-          });
-          localStorage.setItem('user', JSON.stringify(result));
-          // Question: I just wanted the user info to updatein the UI after sending the request to the server. I feel like this is a dirty verion, but is it acceptable?
-          window.location.reload();
-        },
-        error: (error) => {
-          let errorMessage = error.message;
+    this.fetchApiData.editUser(this.getUpdatedUserData()).subscribe({
+      next: (result) => {
+        console.log(result);
+        this.dialogRef.close();
+        this.snackBar.open('Update successful!', 'OK', {
+          duration: 2000,
+        });
+        localStorage.setItem('user', JSON.stringify(result));
+        // Question: I just wanted the user info to updatein the UI after sending the request to the server. I feel like this is a dirty verion, but is it acceptable?
+        window.location.reload();
+      },
+      error: (error) => {
+        let errorMessage = error.message;
 
-          console.error(errorMessage);
-          this.snackBar.open(errorMessage, 'OK', {
-            duration: 2000,
-          });
-        },
-      });
+        console.error(errorMessage);
+        this.snackBar.open(errorMessage, 'OK', {
+          duration: 2000,
+        });
+      },
+    });
   }
 }

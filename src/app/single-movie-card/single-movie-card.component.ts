@@ -31,47 +31,43 @@ export class SingleMovieCardComponent {
 
   like(): void {
     if (!this.isLiked) {
-      this.fetchApiData
-        .addFavouriteMovie(this.data.user.Username, this.data.movie._id)
-        .subscribe({
-          next: (result) => {
-            console.log(result);
-            this.snackBar.open('Added to Top Movies', 'OK', {
-              duration: 2000,
-            });
-            localStorage.setItem('user', JSON.stringify(result));
-            this.isLiked = true;
-          },
-          error: (error) => {
-            let errorMessage = error.message;
+      this.fetchApiData.addFavouriteMovie(this.data.movie._id).subscribe({
+        next: (result) => {
+          console.log(result);
+          this.snackBar.open('Added to Top Movies', 'OK', {
+            duration: 2000,
+          });
+          localStorage.setItem('user', JSON.stringify(result));
+          this.isLiked = true;
+        },
+        error: (error) => {
+          let errorMessage = error.message;
 
-            console.error(errorMessage);
-            this.snackBar.open(errorMessage, 'OK', {
-              duration: 2000,
-            });
-          },
-        });
+          console.error(errorMessage);
+          this.snackBar.open(errorMessage, 'OK', {
+            duration: 2000,
+          });
+        },
+      });
     } else if (this.isLiked) {
-      this.fetchApiData
-        .deleteFavouriteMovie(this.data.user.Username, this.data.movie._id)
-        .subscribe({
-          next: (result) => {
-            console.log(result);
-            this.snackBar.open('Removed from Top Movies', 'OK', {
-              duration: 2000,
-            });
-            localStorage.setItem('user', JSON.stringify(result));
-            this.isLiked = false;
-          },
-          error: (error) => {
-            let errorMessage = error.message;
+      this.fetchApiData.deleteFavouriteMovie(this.data.movie._id).subscribe({
+        next: (result) => {
+          console.log(result);
+          this.snackBar.open('Removed from Top Movies', 'OK', {
+            duration: 2000,
+          });
+          localStorage.setItem('user', JSON.stringify(result));
+          this.isLiked = false;
+        },
+        error: (error) => {
+          let errorMessage = error.message;
 
-            console.error(errorMessage);
-            this.snackBar.open(errorMessage, 'OK', {
-              duration: 2000,
-            });
-          },
-        });
+          console.error(errorMessage);
+          this.snackBar.open(errorMessage, 'OK', {
+            duration: 2000,
+          });
+        },
+      });
     }
   }
 

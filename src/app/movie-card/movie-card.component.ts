@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { SingleMovieCardComponent } from '../single-movie-card/single-movie-card.component';
 
 @Component({
@@ -16,14 +15,12 @@ export class MovieCardComponent {
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    public dialog: MatDialog,
-    public router: Router
+    public dialog: MatDialog
   ) {}
 
   // Question: Why does this work, even if I'm not using implements OnInit?
   ngOnInit(): void {
     this.getMovies();
-    this.getUser();
   }
 
   // Question: Why is the return type void? That doesn't make sense. I guess I should define the movies array Observable type, or at least write Observable<any>, no?
@@ -35,21 +32,10 @@ export class MovieCardComponent {
     });
   }
 
-  getUser(): string | undefined {
-    const userString = localStorage.getItem('user');
-    if (userString) {
-      this.user = JSON.parse(userString);
-      return this.user;
-    } else {
-      this.router.navigate(['welcome']);
-      return;
-    }
-  }
-
   openMovieCard(movie: any): void {
     this.dialog.open(SingleMovieCardComponent, {
       width: '560px',
-      data: { movie: movie, user: this.user },
+      data: { movie: movie },
     });
   }
 }
