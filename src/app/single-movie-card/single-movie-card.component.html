@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ movie.Title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <img
+      mat-card-image
+      src="{{ movie.ImagePath }}"
+      alt="Poster of the movie {{ movie.Title }}"
+      width="280px"
+    />
+    <p>
+      Director:
+      <span
+        ><button (click)="toggleDirectorDetails()">
+          {{ movie.Director.Name }}
+        </button></span
+      >
+    </p>
+    <div *ngIf="displayDirectorDetails">
+      <p>
+        Birth: {{ movie.Director.Birth }}
+        {{ movie.Director.Death ? ", Death: " + movie.Director.Death : "" }}
+      </p>
+      <p>{{ movie.Director.Bio }}</p>
+    </div>
+    <p>
+      Genre:
+      <span
+        ><button (click)="toggleGenreDetails()">
+          {{ movie.Genre.Name }}
+        </button></span
+      >
+    </p>
+    <div *ngIf="displayGenreDetails">
+      <p>
+        {{ movie.Genre.Description }}
+      </p>
+    </div>
+    <p>{{ movie.Description }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="closeDialog()">Close</button>
+  </mat-card-actions>
+</mat-card>

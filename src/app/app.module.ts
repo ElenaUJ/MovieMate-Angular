@@ -31,6 +31,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { UserUpdateFormComponent } from './user-update-form/user-update-form.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { SingleMovieCardComponent } from './single-movie-card/single-movie-card.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     ProfilePageComponent,
     UserUpdateFormComponent,
     NavigationBarComponent,
+    SingleMovieCardComponent,
   ],
   imports: [
     BrowserModule,
