@@ -54,6 +54,7 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  // Not used
   public getOneMovie(title: string): Observable<any> {
     const token = localStorage.getItem('token');
 
@@ -64,6 +65,7 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  // Not used
   public getDirector(directorName: string): Observable<any> {
     const token = localStorage.getItem('token');
 
@@ -74,6 +76,7 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  // Not used
   public getGenre(genreName: string): Observable<any> {
     const token = localStorage.getItem('token');
 
@@ -96,55 +99,62 @@ export class FetchApiDataService {
   // }
 
   // No endpoint in API
-  public getFavouriteMovies(username: string): Observable<any> {
+  // public getFavouriteMovies(username: string): Observable<any> {
+  //   const token = localStorage.getItem('token');
+
+  //   return this.http
+  //     .get(apiUrl + 'users/' + username + '/topMovies', {
+  //       headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
+  //     })
+  //     .pipe(map(this.extractResponseData), catchError(this.handleError));
+  // }
+
+  public addFavouriteMovie(movieid: string): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    return (
+      this.http
+        // Added null as second argument to indicate that there is no request body
+        .post(
+          apiUrl + 'users/' + this.getUsername() + '/topMovies/' + movieid,
+          null,
+          {
+            headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
+          }
+        )
+        .pipe(map(this.extractResponseData), catchError(this.handleError))
+    );
+  }
+
+  public deleteFavouriteMovie(movieid: string): Observable<any> {
     const token = localStorage.getItem('token');
 
     return this.http
-      .get(apiUrl + 'users/' + username + '/topMovies', {
-        headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
-      })
+      .delete(
+        apiUrl + 'users/' + this.getUsername() + '/topMovies/' + movieid,
+        {
+          headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
+        }
+      )
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  public addFavouriteMovie(username: string, movieid: string): Observable<any> {
-    const token = localStorage.getItem('token');
-
-    return this.http
-      .post(apiUrl + 'users/' + username + '/topMovies/' + movieid, {
-        headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
-
-  public deleteFavouriteMovie(
-    username: string,
-    movieid: string
-  ): Observable<any> {
-    const token = localStorage.getItem('token');
-
-    return this.http
-      .delete(apiUrl + 'users/' + username + '/topMovies/' + movieid, {
-        headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
-
-  public editUser(username: string, updatedDetails: any): Observable<any> {
+  public editUser(updatedDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
     console.log(updatedDetails);
 
     return this.http
-      .put(apiUrl + 'users/' + username, updatedDetails, {
+      .put(apiUrl + 'users/' + this.getUsername(), updatedDetails, {
         headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  public deleteUser(username: string): Observable<any> {
+  public deleteUser(): Observable<any> {
     const token = localStorage.getItem('token');
 
     return this.http
-      .delete(apiUrl + 'users/' + username, {
+      .delete(apiUrl + 'users/' + this.getUsername(), {
         headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
       })
       .pipe(
@@ -159,6 +169,13 @@ export class FetchApiDataService {
           }
         })
       );
+  }
+
+  private getUsername(): string {
+    const userString = localStorage.getItem('user');
+    const user = userString ? JSON.parse(userString) : null;
+    const username = user?.Username;
+    return username;
   }
 
   // res type can be Response or Object
@@ -197,6 +214,11 @@ export class FetchApiDataService {
       });
       console.error(`Error Status code ${error.status}, ` + `Validation error`);
       // API error with unknown/unexpected format
+    } else if (error?.error) {
+      errorMessage = error.error;
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${errorMessage}`
+      );
     } else {
       console.error(
         `Error Status code ${error.status}, ` + `Error body is: ${error.error}`

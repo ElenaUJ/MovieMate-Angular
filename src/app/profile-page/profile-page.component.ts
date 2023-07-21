@@ -43,7 +43,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   deleteUser(): void {
-    this.fetchApiData.deleteUser(this.user.Username).subscribe({
+    this.fetchApiData.deleteUser().subscribe({
       next: () => {
         this.snackBar.open('Account has been deleted!', 'OK', {
           duration: 2000,
