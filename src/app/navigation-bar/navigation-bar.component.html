@@ -1,5 +1,5 @@
-<mat-toolbar color="primary">
-  <span>Moviemate</span>
+<mat-toolbar class="nav-bar">
+  <span class="logo">Moviemate</span>
   <a *ngIf="loggedIn" mat-button routerLink="/movies">Home</a>
   <a *ngIf="loggedIn" mat-button routerLink="/profile">Profile</a>
   <a *ngIf="loggedIn" mat-button (click)="onLogOut()">Log Out</a>

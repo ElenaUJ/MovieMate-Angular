@@ -1,20 +1,25 @@
 <app-navigation-bar></app-navigation-bar>
 <div class="main-page">
-  <h1>Welcome to moviemate!</h1>
-  <button
-    mat-raised-button
-    (click)="openUserRegistrationDialog()"
-    style="margin-right: 10px"
-    color="primary"
-  >
-    Sign Up
-  </button>
-  <button
-    mat-raised-button
-    (click)="openUserLoginDialog()"
-    style="margin-right: 10px"
-    color="primary"
-  >
-    Login
-  </button>
+  <div class="actions-panel">
+    <h1>Welcome to Moviemate!</h1>
+    <p>Discover the Magic of Cinema: Your Ultimate Movie Companion</p>
+    <button
+      mat-raised-button
+      class="dark-red"
+      (click)="openUserRegistrationDialog()"
+      style="margin-right: 10px"
+      color="primary"
+    >
+      Sign Up
+    </button>
+    <button
+      mat-raised-button
+      class="dark-red"
+      (click)="openUserLoginDialog()"
+      style="margin-right: 10px"
+      color="primary"
+    >
+      Login
+    </button>
+  </div>
 </div>
