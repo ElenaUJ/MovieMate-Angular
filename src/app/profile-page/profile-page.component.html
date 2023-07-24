@@ -1,0 +1,39 @@
+<app-navigation-bar></app-navigation-bar>
+<div class="profile-page">
+  <h1>Your profile</h1>
+  <table>
+    <tr>
+      <td>Username</td>
+      <td>{{ user.Username }}</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>{{ user.Email }}</td>
+    </tr>
+    <tr>
+      <td>Birthday</td>
+      <td>{{ user.Birthday | date : "longDate" }}</td>
+    </tr>
+  </table>
+  <button
+    mat-raised-button
+    (click)="openUserUpdateDialog()"
+    style="margin-right: 10px"
+    color="primary"
+  >
+    Update Your Details
+  </button>
+  <button mat-raised-button (click)="deleteUser()" color="warning">
+    Delete Account
+  </button>
+  <div>
+    <mat-card *ngFor="let movie of topMovies; let i = index">
+      <mat-card-content>
+        <mat-card-title>{{ movie.Title }}</mat-card-title>
+        <mat-card-subtitle
+          ><img src="{{ movie.ImagePath }}"
+        /></mat-card-subtitle>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

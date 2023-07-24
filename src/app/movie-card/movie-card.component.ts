@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SingleMovieCardComponent } from '../single-movie-card/single-movie-card.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -10,8 +12,12 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 export class MovieCardComponent {
   movies: any[] = [];
 
-  constructor(public fetchApiData: FetchApiDataService) {}
+  constructor(
+    public fetchApiData: FetchApiDataService,
+    public dialog: MatDialog
+  ) {}
 
+  // Question: Why does this work, even if I'm not using implements OnInit?
   ngOnInit(): void {
     this.getMovies();
   }
@@ -22,6 +28,13 @@ export class MovieCardComponent {
       this.movies = resp;
       console.log(this.movies);
       return this.movies;
+    });
+  }
+
+  openMovieCard(movie: any): void {
+    this.dialog.open(SingleMovieCardComponent, {
+      width: '560px',
+      data: { movie: movie },
     });
   }
 }
