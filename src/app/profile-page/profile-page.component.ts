@@ -12,6 +12,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 })
 export class ProfilePageComponent implements OnInit {
   user: any;
+  topMovies: any[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -22,6 +23,7 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
+    this.getTopMovies();
   }
 
   // Add return type!!
@@ -34,6 +36,17 @@ export class ProfilePageComponent implements OnInit {
       this.router.navigate(['welcome']);
       return;
     }
+  }
+
+  getTopMovies() {
+    const usersTopMoviesIds = this.user.TopMovies;
+    this.fetchApiData.getAllMovies().subscribe((response: any) => {
+      console.log('getTopMovies response: ' + response);
+      this.topMovies = usersTopMoviesIds.map((movieId: string) => {
+        return response.find((movie: any) => movie._id === movieId);
+      });
+      console.log('this are the top movies: ' + this.topMovies);
+    });
   }
 
   openUserUpdateDialog(): void {
