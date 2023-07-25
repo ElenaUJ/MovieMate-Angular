@@ -17,23 +17,27 @@
   </table>
   <button
     mat-raised-button
+    class="dark-red"
     (click)="openUserUpdateDialog()"
     style="margin-right: 10px"
-    color="primary"
   >
     Update Your Details
   </button>
-  <button mat-raised-button (click)="deleteUser()" color="warning">
+  <button mat-raised-button class="delete" (click)="deleteUser()">
     Delete Account
   </button>
-  <div>
-    <mat-card *ngFor="let movie of topMovies; let i = index">
-      <mat-card-content>
-        <mat-card-title>{{ movie.Title }}</mat-card-title>
-        <mat-card-subtitle
-          ><img src="{{ movie.ImagePath }}"
-        /></mat-card-subtitle>
-      </mat-card-content>
-    </mat-card>
+  <div class="top-movie-wrapper">
+    <h2>Top Movies</h2>
+    <div class="movie-grid">
+      <mat-card
+        *ngFor="let movie of topMovies; let i = index"
+        (click)="openMovieCard(movie)"
+      >
+        <mat-card-header
+          ><mat-card-title>{{ movie.Title }}</mat-card-title></mat-card-header
+        >
+        <img mat-card-img src="{{ movie.ImagePath }}" />
+      </mat-card>
+    </div>
   </div>
 </div>

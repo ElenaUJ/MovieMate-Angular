@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserUpdateFormComponent } from '../user-update-form/user-update-form.component';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { SingleMovieCardComponent } from '../single-movie-card/single-movie-card.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -73,6 +74,13 @@ export class ProfilePageComponent implements OnInit {
           duration: 2000,
         });
       },
+    });
+  }
+
+  openMovieCard(movie: any): void {
+    this.dialog.open(SingleMovieCardComponent, {
+      width: '560px',
+      data: { movie: movie },
     });
   }
 }
