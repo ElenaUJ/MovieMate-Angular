@@ -1,0 +1,20 @@
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+  padding: 30px;
+}
+mat-card-header {
+  padding: 16px 4px;
+  justify-content: center;
+}
+mat-card-title,
+mat-card-subtitle {
+  text-align: center;
+}
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
