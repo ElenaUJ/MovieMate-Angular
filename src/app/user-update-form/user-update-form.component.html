@@ -1,8 +1,8 @@
-<mat-card>
+<mat-card class="form-card">
   <mat-card-header>
     <mat-card-title>Update your profile!</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
+  <mat-card-content class="form-wrapper">
     <form>
       <mat-form-field>
         <input
@@ -43,7 +43,12 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="updateUser()" color="primary">
+    <button
+      mat-raised-button
+      class="dark-red"
+      (click)="updateUser()"
+      color="primary"
+    >
       Update
     </button>
   </mat-card-actions>

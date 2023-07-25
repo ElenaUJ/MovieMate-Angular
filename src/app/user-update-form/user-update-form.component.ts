@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Input, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FetchApiDataService } from '../fetch-api-data.service';
 
@@ -16,42 +16,24 @@ export class UserUpdateFormComponent implements OnInit {
     Birthday: '',
   };
 
-  currentUser: any;
-
   constructor(
+    @Inject(MAT_DIALOG_DATA) public user: any,
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserUpdateFormComponent>,
     public snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {}
-
-  getUpdatedUserData(): any {
-    let updatedUserData: {
-      Username?: string;
-      Password?: string;
-      Email?: string;
-      Birthday?: string;
-    } = {};
-
-    if (this.userData.Username !== '') {
-      updatedUserData.Username = this.userData.Username;
-    }
-    if (this.userData.Password !== '') {
-      updatedUserData.Password = this.userData.Password;
-    }
-    if (this.userData.Email !== '') {
-      updatedUserData.Email = this.userData.Email;
-    }
-    if (this.userData.Birthday !== '') {
-      updatedUserData.Birthday = this.userData.Birthday;
-    }
-
-    return updatedUserData;
+  ngOnInit(): void {
+    this.userData = {
+      Username: this.user.Username,
+      Password: this.user.Password,
+      Email: this.user.Email,
+      Birthday: this.user.Birthday,
+    };
   }
 
   updateUser(): void {
-    this.fetchApiData.editUser(this.getUpdatedUserData()).subscribe({
+    this.fetchApiData.editUser(this.userData).subscribe({
       next: (result) => {
         console.log(result);
         this.dialogRef.close();
@@ -59,8 +41,6 @@ export class UserUpdateFormComponent implements OnInit {
           duration: 2000,
         });
         localStorage.setItem('user', JSON.stringify(result));
-        // Question: I just wanted the user info to updatein the UI after sending the request to the server. I feel like this is a dirty verion, but is it acceptable?
-        window.location.reload();
       },
       error: (error) => {
         let errorMessage = error.message;

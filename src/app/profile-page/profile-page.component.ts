@@ -52,7 +52,8 @@ export class ProfilePageComponent implements OnInit {
 
   openUserUpdateDialog(): void {
     this.dialog.open(UserUpdateFormComponent, {
-      width: '280px',
+      width: '300px',
+      data: { user: this.user },
     });
   }
 
