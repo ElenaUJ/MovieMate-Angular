@@ -21,13 +21,13 @@
     (click)="openUserUpdateDialog()"
     style="margin-right: 10px"
   >
-    Update Your Details
+    Update Details
   </button>
   <button mat-raised-button class="delete" (click)="deleteUser()">
     Delete Account
   </button>
   <div class="top-movie-wrapper">
-    <h2>Top Movies</h2>
+    <h2>Your Top Movies</h2>
     <div class="movie-grid">
       <mat-card
         *ngFor="let movie of topMovies; let i = index"

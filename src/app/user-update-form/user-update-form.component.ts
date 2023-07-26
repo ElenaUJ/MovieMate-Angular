@@ -23,17 +23,43 @@ export class UserUpdateFormComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
-    this.userData = {
-      Username: this.user.Username,
-      Password: this.user.Password,
-      Email: this.user.Email,
-      Birthday: this.user.Birthday,
-    };
+  ngOnInit(): void {}
+
+  getUpdatedUserData(): any {
+    let updatedUserData: {
+      Username?: string;
+      Password?: string;
+      Email?: string;
+      Birthday?: string;
+    } = {};
+
+    if (this.userData.Username !== '') {
+      updatedUserData.Username = this.userData.Username;
+    }
+    if (this.userData.Password !== '') {
+      updatedUserData.Password = this.userData.Password;
+    }
+    if (this.userData.Email !== '') {
+      updatedUserData.Email = this.userData.Email;
+    }
+    if (this.userData.Birthday !== '') {
+      updatedUserData.Birthday = this.userData.Birthday;
+    }
+
+    return Object.keys(updatedUserData).length === 0 ? null : updatedUserData;
   }
 
   updateUser(): void {
-    this.fetchApiData.editUser(this.userData).subscribe({
+    const updatedUserData = this.getUpdatedUserData();
+
+    if (!updatedUserData) {
+      this.snackBar.open('No changes to update!', 'OK', {
+        duration: 2000,
+      });
+      return;
+    }
+
+    this.fetchApiData.editUser(updatedUserData).subscribe({
       next: (result) => {
         console.log(result);
         this.dialogRef.close();
