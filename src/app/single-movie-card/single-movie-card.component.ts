@@ -17,20 +17,10 @@ export class SingleMovieCardComponent implements OnInit {
   ) {}
 
   movie: any = this.data.movie;
-  displayDirectorDetails: boolean = false;
-  displayGenreDetails: boolean = false;
   isLiked: boolean = false;
 
   ngOnInit(): void {
     this.setLikedState();
-  }
-
-  toggleDirectorDetails(): void {
-    this.displayDirectorDetails = !this.displayDirectorDetails;
-  }
-
-  toggleGenreDetails(): void {
-    this.displayGenreDetails = !this.displayGenreDetails;
   }
 
   like(): void {
@@ -83,9 +73,5 @@ export class SingleMovieCardComponent implements OnInit {
     this.isLiked =
       topMovies.filter((movieId: string) => movieId === this.data.movie._id)
         .length > 0;
-  }
-
-  closeDialog(): void {
-    this.dialogRef.close();
   }
 }

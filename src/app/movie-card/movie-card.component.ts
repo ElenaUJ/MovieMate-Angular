@@ -33,7 +33,6 @@ export class MovieCardComponent {
 
   openMovieCard(movie: any): void {
     this.dialog.open(SingleMovieCardComponent, {
-      width: '560px',
       data: { movie: movie },
     });
   }

@@ -1,31 +1,37 @@
 <app-navigation-bar></app-navigation-bar>
 <div class="profile-page">
-  <h1>Your profile</h1>
-  <table>
-    <tr>
-      <td>Username</td>
-      <td>{{ user.Username }}</td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td>{{ user.Email }}</td>
-    </tr>
-    <tr>
-      <td>Birthday</td>
-      <td>{{ user.Birthday | date : "longDate" }}</td>
-    </tr>
-  </table>
-  <button
-    mat-raised-button
-    class="dark-red"
-    (click)="openUserUpdateDialog()"
-    style="margin-right: 10px"
-  >
-    Update Details
-  </button>
-  <button mat-raised-button class="delete" (click)="deleteUser()">
-    Delete Account
-  </button>
+  <div class="details-wrapper">
+    <h2>Your Information</h2>
+    <mat-card class="user-details">
+      <mat-card-content>
+        <table>
+          <tr>
+            <td>Username:</td>
+            <td>{{ user.Username }}</td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td>{{ user.Email }}</td>
+          </tr>
+          <tr>
+            <td>Birthday:</td>
+            <td>{{ user.Birthday | date : "longDate" }}</td>
+          </tr>
+        </table>
+        <button
+          mat-raised-button
+          class="dark-red"
+          (click)="openUserUpdateDialog()"
+          style="margin-right: 10px"
+        >
+          Update Details
+        </button>
+        <button mat-raised-button class="delete" (click)="deleteUser()">
+          Delete Account
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
   <div class="top-movie-wrapper">
     <h2>Your Top Movies</h2>
     <div class="movie-grid">
@@ -34,8 +40,8 @@
         (click)="openMovieCard(movie)"
       >
         <mat-card-header
-          ><mat-card-title>{{ movie.Title }}</mat-card-title></mat-card-header
-        >
+          ><mat-card-title>{{ movie.Title }}</mat-card-title>
+        </mat-card-header>
         <img mat-card-img src="{{ movie.ImagePath }}" />
       </mat-card>
     </div>

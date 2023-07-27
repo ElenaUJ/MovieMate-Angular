@@ -1,4 +1,40 @@
-.scrollable {
-  height: window;
-  overflow-y: auto;
+.single-movie-card {
+  display: flex;
+  padding: 30px;
+}
+.movie-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+}
+.header {
+  display: flex;
+}
+.like-button {
+  align-items: center;
+  color: #8b0000;
+  display: flex;
+  margin-left: auto;
+}
+mat-icon {
+  transform: scale(1.5);
+}
+.movie-details {
+  margin: 15px 0 30px 0;
+}
+.poster {
+  height: auto;
+  width: 250px;
+}
+
+@media screen and (max-width: 850px) {
+  .single-movie-card {
+    flex-direction: column;
+  }
+  .movie-info-wrapper {
+    margin-right: 0;
+  }
+  .poster {
+    width: 100%;
+  }
 }
