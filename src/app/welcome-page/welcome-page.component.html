@@ -1,25 +1,33 @@
 <app-navigation-bar></app-navigation-bar>
 <div class="main-page">
-  <div class="actions-panel">
-    <h1>Welcome to Moviemate!</h1>
-    <p>Discover the Magic of Cinema: Your Ultimate Movie Companion</p>
-    <button
-      mat-raised-button
-      class="dark-red"
-      (click)="openUserLoginDialog()"
-      style="margin-right: 10px"
-      color="primary"
-    >
-      Login
-    </button>
-    <button
-      mat-raised-button
-      class="dark-red"
-      (click)="openUserRegistrationDialog()"
-      style="margin-right: 10px"
-      color="primary"
-    >
-      Sign Up
-    </button>
-  </div>
+  <mat-card class="actions-panel">
+    <mat-card-header
+      ><mat-card-title>
+        <h1>Welcome to Moviemate!</h1>
+      </mat-card-title>
+      <mat-card-subtitle>
+        Discover the Magic of Cinema: Your Ultimate Movie Companion
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <button
+        mat-raised-button
+        class="dark-red"
+        (click)="openUserLoginDialog()"
+        style="margin-right: 10px"
+        color="primary"
+      >
+        Login
+      </button>
+      <button
+        mat-raised-button
+        class="dark-red"
+        (click)="openUserRegistrationDialog()"
+        style="margin-right: 10px"
+        color="primary"
+      >
+        Sign Up
+      </button>
+    </mat-card-content>
+  </mat-card>
 </div>
