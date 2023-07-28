@@ -1,50 +1,37 @@
-<div class="scrollable">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{ movie.Title }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <img
-        mat-card-image
-        src="{{ movie.ImagePath }}"
-        alt="Poster of the movie {{ movie.Title }}"
-        width="280px"
-      />
-      <p>
-        Director:
-        <span
-          ><button (click)="toggleDirectorDetails()">
-            {{ movie.Director.Name }}
-          </button></span
-        >
-      </p>
-      <div *ngIf="displayDirectorDetails">
+<mat-dialog-content class="single-movie-card">
+  <div class="movie-info-wrapper">
+    <div class="header">
+      <h2>{{ movie.Title }}</h2>
+      <span class="like-button" (click)="like()">
+        <mat-icon *ngIf="isLiked" fontIcon="favorite"></mat-icon>
+        <mat-icon *ngIf="!isLiked" fontIcon="favorite_border"></mat-icon>
+      </span>
+    </div>
+    <p>{{ movie.Description }}</p>
+    <mat-accordion class="movie-details">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Director: {{ movie.Director.Name }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
         <p>
           Birth: {{ movie.Director.Birth }}
           {{ movie.Director.Death ? ", Death: " + movie.Director.Death : "" }}
         </p>
         <p>{{ movie.Director.Bio }}</p>
-      </div>
-      <p>
-        Genre:
-        <span
-          ><button (click)="toggleGenreDetails()">
-            {{ movie.Genre.Name }}
-          </button></span
-        >
-      </p>
-      <div *ngIf="displayGenreDetails">
-        <p>
-          {{ movie.Genre.Description }}
-        </p>
-      </div>
-      <p>{{ movie.Description }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button (click)="like()">
-        {{ isLiked ? "Unlike" : "Love this" }}
-      </button>
-      <button (click)="closeDialog()">Close</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Genre: {{ movie.Genre.Name }} </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{ movie.Genre.Description }}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <img
+    class="poster"
+    src="{{ movie.ImagePath }}"
+    alt="Poster of the movie {{ movie.Title }}"
+  />
+</mat-dialog-content>

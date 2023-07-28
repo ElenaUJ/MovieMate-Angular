@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserUpdateFormComponent } from '../user-update-form/user-update-form.component';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { SingleMovieCardComponent } from '../single-movie-card/single-movie-card.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -24,6 +25,12 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
     this.getTopMovies();
+
+    // Subscribing to TopMovie updates
+    this.fetchApiData.updateUserObject.subscribe(() => {
+      this.getUser();
+      this.getTopMovies();
+    });
   }
 
   // Add return type!!
@@ -51,7 +58,8 @@ export class ProfilePageComponent implements OnInit {
 
   openUserUpdateDialog(): void {
     this.dialog.open(UserUpdateFormComponent, {
-      width: '280px',
+      width: '300px',
+      data: { user: this.user },
     });
   }
 
@@ -73,6 +81,12 @@ export class ProfilePageComponent implements OnInit {
           duration: 2000,
         });
       },
+    });
+  }
+
+  openMovieCard(movie: any): void {
+    this.dialog.open(SingleMovieCardComponent, {
+      data: { movie: movie },
     });
   }
 }

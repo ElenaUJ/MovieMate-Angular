@@ -6,7 +6,13 @@ import {
   HttpErrorResponse,
   HttpResponse,
 } from '@angular/common/http';
-import { Observable, ObservedValuesFromArray, of, throwError } from 'rxjs';
+import {
+  Observable,
+  ObservedValuesFromArray,
+  of,
+  Subject,
+  throwError,
+} from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 // Moviemate backend API URL
@@ -34,6 +40,9 @@ export class FetchApiDataService {
         .pipe(catchError(this.handleError))
     );
   }
+
+  // Whenever there is an update, a value gets emitted to subscribers
+  updateUserObject: Subject<void> = new Subject<void>();
 
   // Authentication happens server side
   public userLogin(userDetails: any): Observable<any> {

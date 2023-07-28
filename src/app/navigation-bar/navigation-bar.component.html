@@ -1,6 +1,16 @@
-<mat-toolbar color="primary">
-  <span>Moviemate</span>
-  <a *ngIf="loggedIn" mat-button routerLink="/movies">Home</a>
-  <a *ngIf="loggedIn" mat-button routerLink="/profile">Profile</a>
-  <a *ngIf="loggedIn" mat-button (click)="onLogOut()">Log Out</a>
+<mat-toolbar class="nav-bar">
+  <span class="logo">Moviemate</span>
+  <div class="hamburger-menu" *ngIf="loggedIn">
+    <mat-icon [matMenuTriggerFor]="menu">menu</mat-icon>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item class="nav-link" routerLink="/movies">Home</a>
+      <a mat-menu-item class="nav-link" routerLink="/profile">Profile</a>
+      <a mat-menu-item class="nav-link logout" (click)="onLogOut()">Log Out</a>
+    </mat-menu>
+  </div>
+  <div class="expanded" *ngIf="loggedIn">
+    <a class="nav-link" routerLink="/movies">Home</a>
+    <a class="nav-link" routerLink="/profile">Profile</a>
+    <a class="nav-link logout" (click)="onLogOut()">Log Out</a>
+  </div>
 </mat-toolbar>

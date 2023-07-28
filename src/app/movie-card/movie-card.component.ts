@@ -25,7 +25,7 @@ export class MovieCardComponent {
   // Question: Why is the return type void? That doesn't make sense. I guess I should define the movies array Observable type, or at least write Observable<any>, no?
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
+      this.movies = resp.sort(this.sortMoviesByTitle);
       console.log(this.movies);
       return this.movies;
     });
@@ -33,8 +33,20 @@ export class MovieCardComponent {
 
   openMovieCard(movie: any): void {
     this.dialog.open(SingleMovieCardComponent, {
-      width: '560px',
       data: { movie: movie },
     });
+  }
+
+  sortMoviesByTitle(movieA: any, movieB: any): number {
+    const titleA = movieA.Title.toUpperCase(); // Convert to uppercase to make the comparison case-insensitive
+    const titleB = movieB.Title.toUpperCase();
+
+    if (titleA < titleB) {
+      return -1;
+    } else if (titleA > titleB) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 }

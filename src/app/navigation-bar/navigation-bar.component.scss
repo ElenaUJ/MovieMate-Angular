@@ -1,0 +1,45 @@
+.nav-bar {
+  background-color: #8b0000;
+}
+.logo {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 10px;
+}
+.hamburger-menu {
+  display: none;
+  color: white;
+}
+.nav-link {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+.expanded {
+  display: flex;
+  width: 100%;
+}
+.logout {
+  margin-left: auto;
+}
+.logout:hover,
+.hamburger:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-link {
+    color: black;
+  }
+  .expanded {
+    display: none;
+  }
+  .hamburger-menu {
+    display: block;
+    margin: 0 10px 0 auto;
+  }
+  .logout {
+    margin-left: 10px;
+  }
+}
