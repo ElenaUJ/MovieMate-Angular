@@ -67,6 +67,7 @@ export class UserUpdateFormComponent implements OnInit {
           duration: 2000,
         });
         localStorage.setItem('user', JSON.stringify(result));
+        this.fetchApiData.updateUserObject.next();
       },
       error: (error) => {
         let errorMessage = error.message;

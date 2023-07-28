@@ -25,6 +25,12 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
     this.getTopMovies();
+
+    // Subscribing to TopMovie updates
+    this.fetchApiData.updateUserObject.subscribe(() => {
+      this.getUser();
+      this.getTopMovies();
+    });
   }
 
   // Add return type!!

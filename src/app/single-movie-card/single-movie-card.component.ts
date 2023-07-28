@@ -52,6 +52,7 @@ export class SingleMovieCardComponent implements OnInit {
           });
           localStorage.setItem('user', JSON.stringify(result));
           this.setLikedState();
+          this.fetchApiData.updateUserObject.next();
         },
         error: (error) => {
           let errorMessage = error.message;
