@@ -15,7 +15,7 @@
 
 MovieMate is a movie app that allows users to access information about different movies. Users can register, update their personal information, and manage a list of their favourite movies.
 
-The client side user interface complements the REST API and MongoDB database which have been [set up previously](https://github.com/ElenaUJ/MyFlix-movie-app), providing a seamless experience for users. Built with the MEAN-stack (MongoDB, Express, Angular, Node.js), MovieMate is a full-stack we application which offers a user-friendly, responsive and efficient solution for those seeking movie information and management.
+The client side user interface complements the REST API and MongoDB database which have been [set up previously](https://github.com/ElenaUJ/MyFlix-movie-app), providing a seamless experience for users. Built with the MEAN-stack (MongoDB, Express, Angular, Node.js), MovieMate is a full-stack application which offers a user-friendly, responsive and efficient solution for those seeking movie information and management.
 
 ## How to Run
 
@@ -23,6 +23,7 @@ The client side user interface complements the REST API and MongoDB database whi
 
 - Node.js
 - npm
+- Angular and Angular CLI (version 9 or above; to install, run `npm install -g @angular/cli@latest`)
 
 **Installation**
 
