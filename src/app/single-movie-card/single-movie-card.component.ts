@@ -66,7 +66,6 @@ export class SingleMovieCardComponent implements OnInit {
     }
   }
 
-  // Question: There's one thing I haven't quite understood yet. I'm going to use this as an example. So here, to get to the topMovies array, I am pulling the user from the storage. Ultimately, I just want to chekc if this movie is in there or not. Now, Should I initialize some of the variables at the top of the class, e.g. topMovies: any[] = [], or can I just define constants in here, because I won't further use the array here other than for this check.
   setLikedState() {
     const userString = localStorage.getItem('user');
     const user = userString ? JSON.parse(userString) : null;

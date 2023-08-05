@@ -5,16 +5,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // Simplified API facilitation cimmunication of client app with API or server-side
 import { HttpClientModule } from '@angular/common/http';
-//App routing
+// App routing
 import { RouterModule, Routes } from '@angular/router';
 
-// Question: What is this AppRoutingModule for? Are we even using it, because out reouting is managed by the RouterModule?
-import { AppRoutingModule } from './app-routing.module';
+// Check if we even use it
+// import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// Do I need this and where should it go? Was added during Material installation
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Angular Material components
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -40,9 +39,8 @@ const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
   { path: 'profile', component: ProfilePageComponent },
-  // Question: Is pathmatch: 'prefix' even necessary here?
-  // Question: What if the user is logged in? It would be better to redirect to the movies page?
-  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+  // Redirect to welcome if user is not logged in?
+  { path: '', redirectTo: 'movies', pathMatch: 'full' },
 ];
 
 @NgModule({
