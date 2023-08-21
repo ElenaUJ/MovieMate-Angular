@@ -22,11 +22,14 @@ export class ProfilePageComponent implements OnInit {
     private router: Router
   ) {}
 
+  /**
+   * Initializes the component by fetching user data and top movies.
+   * Subscribes to user object updates to keep data in sync.
+   */
   ngOnInit(): void {
     this.getUser();
     this.getTopMovies();
 
-    // Subscribing to TopMovie updates
     this.fetchApiData.updateUserObject.subscribe(() => {
       this.getUser();
       this.getTopMovies();

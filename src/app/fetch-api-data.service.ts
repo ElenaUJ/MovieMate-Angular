@@ -234,9 +234,6 @@ export class FetchApiDataService {
       );
     }
 
-    return throwError(
-      // Question: I spent quite some time on tweaking the error handling to return the message the API sends upon login/registration, because I wanted the snack bar to show a more detailed error message. Is there a better/smarter/more straightforward way of doing it (feels pretty bulky, everything), and should I rather somehow include the logic in the components?
-      () => new Error(errorMessage)
-    );
+    return throwError(() => new Error(errorMessage));
   }
 }

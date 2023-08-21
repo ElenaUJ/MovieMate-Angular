@@ -24,9 +24,6 @@ export class UserRegistrationFormComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {}
 
-  // Method is called once component has received all its inputs - can initialize fetching data, Observable subscription, set up of component properties
-  // Empty for now
-  // : void means that there is no return type
   ngOnInit(): void {}
 
   // Implementing function for registering user: passing userData object into API call
@@ -38,7 +35,6 @@ export class UserRegistrationFormComponent implements OnInit {
       // Success callback function
       next: (result) => {
         console.log(result);
-        // Logic for successful user registration will be implemented here
         // Will close modal on success
         this.dialogRef.close();
         // Second argument 'OK' represents action button

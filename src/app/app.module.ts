@@ -1,6 +1,3 @@
-// Entry point for Angular app
-// Module houses important dependencies so they can be used across components
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // Simplified API facilitation cimmunication of client app with API or server-side
@@ -9,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 // Check if we even use it
-// import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // Angular Material components
@@ -43,6 +40,10 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'movies', pathMatch: 'full' },
 ];
 
+/**
+ * Entry point for Angular app
+ * Module houses important dependencies so they can be used across components
+ */
 @NgModule({
   declarations: [
     AppComponent,

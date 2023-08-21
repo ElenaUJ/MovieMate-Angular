@@ -13,7 +13,6 @@ export class UserLoginFormComponent implements OnInit {
   // The loginData object is in the format expected by the /login endpoint of the API
   @Input() loginData = { Username: '', Password: '' };
 
-  // Initialization of component and dependencies
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
@@ -23,7 +22,6 @@ export class UserLoginFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // Implementing function for logging in user: passing loginData object into API call
   loginUser(): void {
     this.fetchApiData.userLogin(this.loginData).subscribe({
       next: (result) => {

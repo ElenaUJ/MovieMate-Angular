@@ -35,8 +35,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Includes conversion to uppercase to make the comparison case-insensitive
+   */
   sortMoviesByTitle(movieA: any, movieB: any): number {
-    const titleA = movieA.Title.toUpperCase(); // Convert to uppercase to make the comparison case-insensitive
+    const titleA = movieA.Title.toUpperCase();
     const titleB = movieB.Title.toUpperCase();
 
     if (titleA < titleB) {
